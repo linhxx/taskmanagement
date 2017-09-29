@@ -22,7 +22,7 @@
     <script src="../static/assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
     <![endif]-->
 
-    <title>Spring Boot管理后台</title>
+    <title>Task Management</title>
     <style>
         .logo{
             width: 30px;
@@ -33,13 +33,9 @@
     </style>
     <script type="text/javascript">
         $(function() {
-            //初始化查询菜单
-//        initData();
-            $("#menus").on("click", ".changeUrl", function() {
+            $("body").on("click", ".changeUrl", function() {
                 var id = $(this).attr("id");
                 var url = $(this).attr("value");
-
-                /*<![CDATA[*/
                 if(id && url){
                     addTabs({
                         id:id,
@@ -48,25 +44,19 @@
                         close:true
                     });
                 }
-                /*]]>*/
             });
             $(".nav-tabs").on("click", ".close-tab", function() {
                 id = $(this).prev("a").attr("aria-controls");
                 closeTab(id);
             });
-
             $("#mainIframe").load(function(){
                 var mainheight =$(this).contents().find("body").height();
-                /*<![CDATA[*/
                 if(mainheight<400){
                     mainheight = 400;
                 }
-                /*]]>*/
                 $(this).height(mainheight);
             });
-
         });
-
         //打开菜单
         function changeUrl(url) {
             clearFlash();
@@ -86,9 +76,9 @@
 <div class="navbar navbar-default" id="navbar">
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a th:href="@{/}"  class="navbar-brand" style="height: 45px;">
+            <a th:href="@{/main}"  class="navbar-brand" style="height: 45px;">
                 <small>
-                    <img class="logo"  th:src="@{/assets/images/logo.png}" /> SpringBoot教程管理
+                    <img class="logo"  th:src="@{/assets/images/logo.png}" /> Task Management
                 </small>
             </a>
         </div>
@@ -107,33 +97,28 @@
                             <i class="icon-ok"></i>
                             还有4个任务完成
                         </li>
-
                         <li>
                             <a href="#">
                                 <div class="clearfix">
                                     <span class="pull-left">软件更新</span>
                                     <span class="pull-right">65%</span>
                                 </div>
-
                                 <div class="progress progress-mini ">
                                     <div style="width:65%" class="progress-bar "></div>
                                 </div>
                             </a>
                         </li>
-
                         <li>
                             <a href="#">
                                 <div class="clearfix">
                                     <span class="pull-left">硬件更新</span>
                                     <span class="pull-right">35%</span>
                                 </div>
-
                                 <div class="progress progress-mini ">
                                     <div style="width:35%" class="progress-bar progress-bar-danger"></div>
                                 </div>
                             </a>
                         </li>
-
                         <li>
                             <a href="#">
                                 <div class="clearfix">
@@ -156,112 +141,9 @@
                                 </div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#">
+                            <a id="task" value="/task" class="changeUrl" style="cursor: pointer">
                                 查看任务详情
-                                <i class="icon-arrow-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="icon-bell-alt icon-animated-bell"></i> <span class="badge badge-important">8</span>
-                </a>
-
-                    <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                        <li class="dropdown-header"><i class="icon-warning-sign"></i>8条通知</li>
-                        <li>
-                            <a href="#">
-                                <div class="clearfix">
-                                    <span class="pull-left"> <i class="btn btn-xs no-hover btn-pink icon-comment"></i> 新闻评论 </span> <span class="pull-right badge badge-info">+12</span>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li><a href="#"> <i class="btn btn-xs btn-primary icon-user"></i> 切换为编辑登录..</a></li>
-
-                        <li><a href="#">
-                            <div class="clearfix">
-                                <span class="pull-left"> <i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>新订单</span> <span class="pull-right badge badge-success">+8</span>
-                            </div>
-                        </a></li>
-
-                        <li><a href="#">
-                            <div class="clearfix">
-                                <span class="pull-left"> <i class="btn btn-xs no-hover btn-info icon-twitter"></i> 粉丝 </span> <span class="pull-right badge badge-info">+11</span>
-                            </div>
-                        </a></li>
-
-                        <li><a href="#"> 查看所有通知 <i class="icon-arrow-right"></i>
-                        </a></li>
-                    </ul></li>
-
-                <li class="green">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="icon-envelope icon-animated-vertical"></i>
-                        <span class="badge badge-success">5</span>
-                    </a>
-
-                    <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                        <li class="dropdown-header">
-                            <i class="icon-envelope-alt"></i>
-                            5条消息
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img src="/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-                                <span class="msg-body">
-                                    <span class="msg-title">
-                                        <span class="blue">Alex:</span>
-                                        不知道写啥 ...
-                                    </span>
-
-                                    <span class="msg-time">
-                                        <i class="icon-time"></i>
-                                        <span>1分钟以前</span>
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/assets/avatars/avatar3.png}"  class="msg-photo" alt="Susan's Avatar" />
-                                <span class="msg-body">
-                                    <span class="msg-title">
-                                        <span class="blue">Susan:</span>
-                                        不知道翻译...
-                                    </span>
-
-                                    <span class="msg-time">
-                                        <i class="icon-time"></i>
-                                        <span>20分钟以前</span>
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/assets/avatars/avatar4.png}"  class="msg-photo" alt="Bob's Avatar" />
-                                <span class="msg-body">
-                                    <span class="msg-title">
-                                        <span class="blue">Bob:</span>
-                                        到底是不是英文 ...
-                                    </span>
-
-                                    <span class="msg-time">
-                                        <i class="icon-time"></i>
-                                        <span>下午3:15</span>
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="inbox.html">
-                                查看所有消息
                                 <i class="icon-arrow-right"></i>
                             </a>
                         </li>
@@ -278,7 +160,11 @@
                         <i class="icon-caret-down"></i>
                     </a>
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li><a th:href="${userurl}"> <i class="icon-cog"></i>个人设置</a></li>
+                        <li>
+                            <a th:attr="value=${userurl}" id="personalSet" class="changeUrl" style="cursor: pointer">
+                                <i class="icon-cog"></i>个人设置
+                            </a>
+                        </li>
                         <li class="divider"></li>
                         <li><a id="outLogin" href="/logout"> <i class="icon-off"></i>退出</a></li>
                     </ul>
@@ -300,14 +186,14 @@
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-desktop"></i>
-                        <span class="menu-text">教程管理</span>
+                        <span class="menu-text">任务管理</span>
                         <b class="arrow icon-angle-down"></b>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a id="learn" value="/learn" class="changeUrl" style="cursor: pointer">
+                            <a id="task" value="/task" class="changeUrl" style="cursor: pointer">
                                 <i class="icon-double-angle-right"></i>
-                                SpringBoot学习资料
+                                任务管理
                             </a>
                         </li>
                     </ul>
@@ -315,7 +201,7 @@
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-cogs"></i>
-                        <span class="menu-text">系统管理</span>
+                        <span class="menu-text">用户管理</span>
 
                         <b class="arrow icon-angle-down"></b>
                     </a>
@@ -327,7 +213,7 @@
                                 用户管理
                             </a>
                         </li>
-                        <li>
+                        <li style="display: none;">
                             <a href="tables.html">
                                 <i class="icon-double-angle-right"></i>
                                 角色管理

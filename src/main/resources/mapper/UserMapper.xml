@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dudu.dao.UserMapper">
-  <resultMap id="baseResultMap" type="com.dudu.domain.User">
+<mapper namespace="com.lin.dao.UserMapper">
+  <resultMap id="baseResultMap" type="com.lin.domain.User">
     <id column="id" property="id" jdbcType="BIGINT"  />
     <result column="username" property="username" jdbcType="VARCHAR"/>
     <result column="password" property="password" jdbcType="VARCHAR"/>
   </resultMap>
 
-  <resultMap id="baseResultMapWithoutPassword" type="com.dudu.domain.User">
+  <resultMap id="baseResultMapWithoutPassword" type="com.lin.domain.User">
     <id column="id" property="id" jdbcType="BIGINT"  />
     <result column="username" property="username" jdbcType="VARCHAR"/>
   </resultMap>
@@ -26,6 +26,13 @@
     FROM user
     WHERE username = #{username}
     and password = #{password}
+  </select>
+
+  <select id="getUserByName" resultMap="baseResultMapWithoutPassword" parameterType="java.lang.String">
+    SELECT
+    <include refid="baseColumnListWithoutPassword" />
+    FROM user
+    WHERE username = #{username}
   </select>
 
   <select id="getUserById" resultMap="baseResultMap" parameterType="java.lang.Integer">
@@ -47,11 +54,11 @@
     ORDER BY id DESC
    </select>
 
-  <insert id="addUser" parameterType="com.dudu.domain.User" >
+  <insert id="addUser" parameterType="com.lin.domain.User" >
     INSERT INTO user(id, username, password) VALUES (#{id}, #{username}, #{username})
   </insert>
 
-  <update id="updateUser" parameterType="com.dudu.domain.User">
+  <update id="updateUser" parameterType="com.lin.domain.User">
     UPDATE user SET username = #{username}
     <if test="password != null and password != ''">
       , password = #{password}
@@ -59,7 +66,7 @@
     WHERE id = #{id}
   </update>
 
-  <update id="resetUserPassword" parameterType="com.dudu.domain.User">
+  <update id="resetUserPassword" parameterType="com.lin.domain.User">
     UPDATE user SET password = username
     WHERE id = #{id}
   </update>

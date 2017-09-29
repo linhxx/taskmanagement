@@ -28,6 +28,4 @@
         <appender-ref ref="file" />
     </root>
 
-
-
 </configuration>
