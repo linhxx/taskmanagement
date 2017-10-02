@@ -76,7 +76,7 @@
 <div class="navbar navbar-default" id="navbar">
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a th:href="@{/main}"  class="navbar-brand" style="height: 45px;">
+            <a value="/main" id="main" class="changeUrl navbar-brand" style="cursor: pointer;height: 45px;">
                 <small>
                     <img class="logo"  th:src="@{/assets/images/logo.png}" /> Task Management
                 </small>
@@ -152,7 +152,7 @@
 
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" th:src="@{/assets/images/dudu.jpg}" />
+                        <img class="nav-user-photo" th:src="@{/assets/images/linhxx.jpg}" />
                         <span class="user-info">
                             <small>欢迎光临,</small>
                             <span th:text="${username}"></span>
