@@ -15,9 +15,9 @@ $(function(){
             },
             success:function(result){
                 if(result.flag){
-                    $("#resultDiv").html(result.content);
+                    $("#resultDiv").html(result.message);
                 }else{
-                    alert(result.content);
+                    alert(result.message);
                 }
             },error:function(){
                 layer.msg('请求错误!', {icon: 7,time: 2000});

@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Stack;
 
 public class CalculateService{
-    private Stack<Double> doubleStack;
-    private Stack<Character> charStack;
+    private Stack<Double> doubleStack = new Stack<>();
+    private Stack<Character> charStack = new Stack<>();
     private String strCalcu;
     private Integer strLength;
     private static final HashSet<Character> numStringSet = new HashSet<Character>(){
@@ -48,13 +48,13 @@ public class CalculateService{
         if(ch.equals('+')){
             sum += num;
         }else if(ch.equals('-')){
-            sum = sum - num;
+            sum = num - sum;
         }else if(ch.equals('*')){
             sum *= num;
-        }else if(ch.equals('/') && 0 == num){
-            sum = sum / 1;
+        }else if(ch.equals('/') && 0 == sum){
+            sum = num / 1;
         }else{
-            sum = sum / num;
+            sum = num / sum;
         }
         this.pushDouble(sum);
     }
