@@ -14,7 +14,11 @@ $(function(){
                 loading = layer.load("正在重新设置信息...");
             },
             success:function(result){
-                $("#resultDiv").html(result);
+                if(result.flag){
+                    $("#resultDiv").html(result.content);
+                }else{
+                    alert(result.content);
+                }
             },error:function(){
                 layer.msg('请求错误!', {icon: 7,time: 2000});
             },
