@@ -36,7 +36,7 @@ public class CalculateService{
             this.pushChar(ch);//运算符
         }else if(numStringSet.contains(ch)){
             this.pushDouble(Double.valueOf(String.valueOf(ch)));//数字
-        }else if(ch.equals(")")){
+        }else if(ch.equals(')')){
             res = true;//要计算的情况
         }
         return res;
