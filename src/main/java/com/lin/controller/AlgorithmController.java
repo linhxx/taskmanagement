@@ -1,6 +1,7 @@
 package com.lin.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lin.service.algorithm.CalculateService;
 import com.lin.tools.ServletUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/algorithm")
 public class AlgorithmController {
-
     @RequestMapping("")
     public String main(){
         return "algorithm";
@@ -28,6 +28,10 @@ public class AlgorithmController {
             ServletUtil.createSuccessResponse(200, jo, response);
             return;
         }
-
+        CalculateService calculateService = new CalculateService(calculateString);
+        Double res = calculateService.dealCalculate();
+        jo.put("flag", true);
+        jo.put("message", calculateString + "=" + res);
+        ServletUtil.createSuccessResponse(200, jo, response);
     }
 }
