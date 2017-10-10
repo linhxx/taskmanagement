@@ -16,19 +16,15 @@ public class FindUnionService {
         dealConnectPairs(strPairs);
         getUnion();
     }
-    /**
-     * 创建初始化节点和子节点数目
-     */
     private void createArray(){
+        //创建初始化节点和子节点数目
         for(int i=0;i<this.count;i++){
             this.id[i] = i;
             this.childNum[i] = 1;
         }
     }
-    /**
-     * 创建待连接的数字
-     */
     private void dealConnectPairs(String connectPairs){
+        //创建待连接的数字
         //如果以竖线为分隔符，则split的时候需要加上两个斜杠【\\】进行转义
         String[] pairs = connectPairs.split("\\|");
         Integer pairsNum = pairs.length/2;
@@ -38,15 +34,9 @@ public class FindUnionService {
             this.connectPairs[i][1] = Integer.parseInt(pairs[j++]);
         }
     }
-    public Integer getCount() {
-        return count;
-    }
-    public Integer[] getId() {
-        return id;
-    }
-    public Integer[] getChildNum() {
-        return childNum;
-    }
+    public Integer getCount(){return count;}
+    public Integer[] getId(){return id;}
+    public Integer[] getChildNum(){return childNum;}
     private Integer find(int currentIndex){
         //循环查找父节点
         int parentValue = currentIndex;
@@ -62,9 +52,7 @@ public class FindUnionService {
         }
         return parentValue;
     }
-    public Boolean connected(int p, int q){
-        return find(p) == find(q);
-    }
+    public Boolean connected(int p, int q){return find(p) == find(q);}
     private void getUnion(){
         for (Integer[] connectPair : this.connectPairs) {
             this.union(connectPair[0], connectPair[1]);
@@ -84,5 +72,4 @@ public class FindUnionService {
             this.count--;
         }
     }
-
 }
