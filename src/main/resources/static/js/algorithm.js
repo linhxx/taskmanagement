@@ -35,8 +35,8 @@ $(function(){
      * Find-Union
      */
     $("#queryBtnUnion").click(function(){
-        var countNum = $.trim($('#countNum').val());
-        if(0 >= countNum){
+        var nodeNum = $.trim($('#countNum').val());
+        if(0 >= nodeNum){
             alert("节点要大于1个");
             return;
         }
@@ -49,7 +49,7 @@ $(function(){
             url:"/algorithm/findUnion",
             cache: false,
             type:"post",
-            data:{"countNum" : countNum, "connectPairs" : connectPairs},
+            data:{"nodeNum" : nodeNum, "connectPairs" : connectPairs},
             beforeSend : function(){
                 loading = layer.load("正在重新设置信息...");
             },
