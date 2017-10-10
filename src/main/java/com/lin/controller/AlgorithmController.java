@@ -51,7 +51,7 @@ public class AlgorithmController {
         jo.put("flag", true);
         Integer[] id = fs.getId();
         String msg = "";
-        for(Integer i:id){
+        for(int i=0;i<id.length;i++){
             msg += "节点" + i + "的父节点是-->" + id[i] + "，";
         }
         jo.put("message", "集合数量："+fs.getCount()+"，每个节点的父节点："+msg);
