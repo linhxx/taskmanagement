@@ -40,7 +40,7 @@ $(function(){
             alert("节点要大于1个");
             return;
         }
-        var connectPairs = $.trim($('#comparePairs').text());
+        var connectPairs = $.trim($('#comparePairs').val());
         if(1 >= connectPairs.length){
             alert("连接内容不能是空，以|隔开");
             return;
