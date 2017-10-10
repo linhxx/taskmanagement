@@ -2,6 +2,7 @@ package com.lin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lin.service.algorithm.CalculateService;
+import com.lin.service.algorithm.FindUnionService;
 import com.lin.tools.ServletUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +34,19 @@ public class AlgorithmController {
         jo.put("flag", true);
         jo.put("message", calculateString + "=" + res);
         ServletUtil.createSuccessResponse(200, jo, response);
+    }
+
+    @RequestMapping(value = "/findUnion",method = RequestMethod.POST,produces="application/json;charset=UTF-8")
+    public void findUnion(HttpServletRequest request , HttpServletResponse response){
+        Integer nodeNum = Integer.parseInt(request.getParameter("nodeNum"));
+        String connectPairs = request.getParameter("connectPairs");
+        JSONObject jo = new JSONObject();
+        if(connectPairs.isEmpty() || 1 >= nodeNum || !connectPairs.contains("|")){
+            jo.put("flag", false);
+            jo.put("message", "节点要大于1个，连接内容不能是空，以|隔开");
+            ServletUtil.createSuccessResponse(200, jo, response);
+            return;
+        }
+        FindUnionService fs = new FindUnionService(nodeNum, connectPairs);
     }
 }
