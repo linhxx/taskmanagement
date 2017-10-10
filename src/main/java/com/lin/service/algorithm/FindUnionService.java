@@ -50,7 +50,7 @@ public class FindUnionService {
     private Integer find(int currentIndex){
         //循环查找父节点
         int parentValue = currentIndex;
-        while(currentIndex != this.id[currentIndex]){
+        while(parentValue != this.id[currentIndex]){
             parentValue = this.id[currentIndex];
         }
         //路径压缩，将节点的全部父节点都指向r，把路径压缩成深度是1的树

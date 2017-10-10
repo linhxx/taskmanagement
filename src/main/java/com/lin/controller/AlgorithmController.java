@@ -52,9 +52,9 @@ public class AlgorithmController {
         Integer[] id = fs.getId();
         String msg = "";
         for(int i=0;i<id.length;i++){
-            msg += "节点" + i + "的父节点是-->" + id[i] + "，";
+            msg += "节点" + i + "-->" + id[i] + "，";
         }
-        jo.put("message", "集合数量："+fs.getCount()+"，每个节点的父节点："+msg);
+        jo.put("message", "集合数量："+fs.getCount()+"，每个节点-->父节点："+msg);
         ServletUtil.createSuccessResponse(200, jo, response);
     }
 }
