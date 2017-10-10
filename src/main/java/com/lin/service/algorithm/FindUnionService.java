@@ -30,7 +30,8 @@ public class FindUnionService {
      * @param connectPairs
      */
     private void dealConnectPairs(String connectPairs){
-        String[] pairs = connectPairs.split("|");
+        //如果以竖线为分隔符，则split的时候需要加上两个斜杠【\\】进行转义
+        String[] pairs = connectPairs.split("\\|");
         Integer pairsNum = pairs.length/2;
         this.connectPairs = new Integer[pairsNum][2];
         for(int i=0,j=0;i<pairsNum;i++){
