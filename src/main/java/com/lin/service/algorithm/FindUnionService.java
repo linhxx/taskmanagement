@@ -27,7 +27,6 @@ public class FindUnionService {
     }
     /**
      * 创建待连接的数字
-     * @param connectPairs
      */
     private void dealConnectPairs(String connectPairs){
         //如果以竖线为分隔符，则split的时候需要加上两个斜杠【\\】进行转义
