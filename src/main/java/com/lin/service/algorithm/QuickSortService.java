@@ -73,7 +73,6 @@ public class QuickSortService {
         exchange(a, randomIndex, j);
         return j;
     }
-
     /**
      * 快速排序
      */
