@@ -11,11 +11,11 @@ public class QuickSortService {
         }
     }
     public String getSortedNums(){
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for(Integer i:nums){
-            res += i + "|";
+            res.append(i).append("|");
         }
-        return res;
+        return res.toString();
     }
 
 }
