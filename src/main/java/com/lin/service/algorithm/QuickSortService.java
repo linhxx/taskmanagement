@@ -10,7 +10,7 @@ public class QuickSortService {
             nums[i] = Integer.parseInt(stringArray[i]);
         }
     }
-    public String getSotredNums(){
+    public String getSortedNums(){
         String res = "";
         for(Integer i:nums){
             res += i + "|";

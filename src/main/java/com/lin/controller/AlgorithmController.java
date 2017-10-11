@@ -70,7 +70,7 @@ public class AlgorithmController {
             return;
         }
         QuickSortService quickSortService = new QuickSortService(quickSortInput);
-        String res = quickSortService.getSotredNums();
+        String res = quickSortService.getSortedNums();
         jo.put("flag", true);
         jo.put("message", "排序前：" + quickSortInput + "，排序后：" + res);
         ServletUtil.createSuccessResponse(200, jo, response);
