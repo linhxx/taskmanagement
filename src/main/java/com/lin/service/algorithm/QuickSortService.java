@@ -20,10 +20,10 @@ public class QuickSortService {
         }
         return res.toString();
     }
-    private static Boolean lessOrEqual(Comparable a, Comparable b){
+    private static Boolean less(Comparable a, Comparable b, Boolean equals){
         Integer compare = a.compareTo(b);
         Boolean res = false;
-        if(compare.equals(1)){
+        if(compare.equals(-1) || (equals && compare.equals(0))){
             res = true;
         }
         return res;
@@ -43,7 +43,7 @@ public class QuickSortService {
     private static void insertSort(Comparable[] a){
         int n = a.length;
         for(int i=1;i<n;i++){
-            for(int j=i;j>0 && lessOrEqual(a[j], a[j-1]);j--){
+            for(int j=i;j>0 && less(a[j], a[j-1], false);j--){
                 exchange(a, j, j-1);
             }
         }
@@ -57,11 +57,11 @@ public class QuickSortService {
         Comparable v = a[randomIndex];//切分元素
         while(true){
             //左边找到比v大的元素
-            while(lessOrEqual(a[++i], v)){
+            while(less(a[++i], v, true)){
                 if(i >= high) break;
             }
             //右边找到比v小的元素
-            while(lessOrEqual(v, a[--j])){
+            while(less(v, a[--j], true)){
                 if(j <= low) break;
             }
             //扫描结束退出条件
