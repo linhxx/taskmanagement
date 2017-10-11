@@ -3,6 +3,7 @@ package com.lin.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.lin.service.algorithm.CalculateService;
 import com.lin.service.algorithm.FindUnionService;
+import com.lin.service.algorithm.QuickSortService;
 import com.lin.tools.ServletUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,23 @@ public class AlgorithmController {
             msg += "节点" + i + "-->" + id[i] + "，";
         }
         jo.put("message", "集合数量："+fs.getCount()+"，每个节点-->父节点："+msg);
+        ServletUtil.createSuccessResponse(200, jo, response);
+    }
+
+    @RequestMapping(value = "/quickSort",method = RequestMethod.POST,produces="application/json;charset=UTF-8")
+    public void quickSort(HttpServletRequest request , HttpServletResponse response){
+        String quickSortInput = request.getParameter("quickSortInput");
+        JSONObject jo = new JSONObject();
+        if(quickSortInput.isEmpty()){
+            jo.put("flag", false);
+            jo.put("message", "数字不能空，以|隔开");
+            ServletUtil.createSuccessResponse(200, jo, response);
+            return;
+        }
+        QuickSortService quickSortService = new QuickSortService(quickSortInput);
+        String res = quickSortService.getSotredNums();
+        jo.put("flag", true);
+        jo.put("message", "排序前：" + quickSortInput + "，排序后：" + res);
         ServletUtil.createSuccessResponse(200, jo, response);
     }
 }
