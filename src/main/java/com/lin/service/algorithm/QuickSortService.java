@@ -2,13 +2,21 @@ package com.lin.service.algorithm;
 
 public class QuickSortService {
     private Integer[] nums;
+    private Integer numLength;
     public QuickSortService(String str){
         splitString(str);
         startQuickSort(nums, 0, nums.length-1);
     }
+    public Integer[] getNums() {
+        return nums;
+    }
+    public Integer getNumLength() {
+        return numLength;
+    }
     private void splitString(String str){
         String[] stringArray = str.split("\\|");
-        nums = new Integer[stringArray.length];
+        numLength = stringArray.length;
+        nums = new Integer[numLength];
         for(int i=0;i<stringArray.length;i++){
             nums[i] = Integer.parseInt(stringArray[i]);
         }
@@ -84,5 +92,18 @@ public class QuickSortService {
         int partitionNum = partition(a, low, high);
         startQuickSort(a, low, partitionNum-1);
         startQuickSort(a, partitionNum+1, high);
+    }
+    /**
+     * 求任意数组的第k小元素（不需要排序）
+     */
+    public Integer getMinK(Comparable[] a, int k){
+        int low = 0, high = a.length-1;
+        while (low < high){
+            int j = partition(a, low, high);
+            if(j == k) return (Integer) a[k];
+            else if(j > k) high = j - 1;
+            else if(j < k) low = j + 1;
+        }
+        return (Integer) a[k];
     }
 }
