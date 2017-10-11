@@ -71,8 +71,10 @@ public class AlgorithmController {
         }
         QuickSortService quickSortService = new QuickSortService(quickSortInput);
         String res = quickSortService.getSortedNums();
+        Integer mediumIndex = (int) Math.ceil(quickSortService.getNumLength()/2);
+        Integer mediumNum = quickSortService.getMinK(quickSortService.getNums(), mediumIndex);
         jo.put("flag", true);
-        jo.put("message", "排序前：" + quickSortInput + "，排序后：" + res);
+        jo.put("message", "排序前：" + quickSortInput + "，中位数：" + mediumNum + "，排序后：" + res);
         ServletUtil.createSuccessResponse(200, jo, response);
     }
 }
