@@ -94,6 +94,26 @@ public class QuickSortService {
         startQuickSort(a, partitionNum+1, high);
     }
     /**
+     * 三取样切分
+     */
+    private static void start3WayQuickSort(Comparable[] a, int low, int high){
+        if(a.length <= 5 || high < low + 5){
+            insertSort(a);//数组长度5以内采用插入排序
+            return;
+        }
+        //equalLeft~equalRight区间是等值的情况,low~equal~equalLeft是小的
+        int equalLeft = low, equalRight = high, i = equalLeft +1;
+        Comparable v = a[low];
+        while(i <= equalRight){
+            int cmp = a[i].compareTo(v);
+            if(0 < cmp) exchange(a, i, equalRight--);//a[i]>v，交换i和当前最后一个元素，并将最后一个元素-1
+            else if(0 > cmp) exchange(a, equalLeft++, i++);//a[i]<v，交换i和左边的元素，并且指针往后
+            else i++;//相同的情况，则直接比较下一个元素
+        }
+        start3WayQuickSort(a, low, equalLeft-1);
+        start3WayQuickSort(a, equalRight+1, high);
+    }
+    /**
      * 求任意数组的第k小元素（不需要排序）
      */
     public Integer getMinK(Comparable[] a, int k){
