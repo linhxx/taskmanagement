@@ -51,11 +51,11 @@ public class AlgorithmController {
         FindUnionService fs = new FindUnionService(nodeNum, connectPairs);
         jo.put("flag", true);
         Integer[] id = fs.getId();
-        String msg = "";
+        StringBuilder msg = new StringBuilder();
         for(int i=0;i<id.length;i++){
-            msg += "节点" + i + "-->" + id[i] + "，";
+            msg.append("节点").append(i).append("-->").append(id[i]).append("，");
         }
-        jo.put("message", "集合数量："+fs.getCount()+"，每个节点-->父节点："+msg);
+        jo.put("message", "集合数量："+fs.getCount()+"，每个节点-->父节点："+msg.toString());
         ServletUtil.createSuccessResponse(200, jo, response);
     }
 
