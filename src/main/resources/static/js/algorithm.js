@@ -4,69 +4,69 @@ $(function(){
      */
     $("#queryBtnCalculate").click(function(){
         var calculateString = $.trim($('#calculateString').val());
-        if(0 >= calculateString.length){
-            alert("请输入+-*/()及0-9数字");
-            return;
+        if(checkNotEmpty(calculateString, "请输入+-*/()及0-9数字")){
+            ajaxToController("/algorithm/calculate", {"calculateString" : calculateString});
         }
-        $.ajax({
-            url:"/algorithm/calculate",
-            cache: false,
-            type:"post",
-            data:{"calculateString" : calculateString},
-            beforeSend : function(){
-                loading = layer.load("正在重新设置信息...");
-            },
-            success:function(result){
-                if(result.flag){
-                    $("#resultDiv").html(result.message);
-                }else{
-                    alert(result.message);
-                    $("#resultDiv").html("");
-                }
-            },error:function(){
-                layer.msg('请求错误!', {icon: 7,time: 2000});
-            },
-            complete : function(){
-                layer.close(loading);
-            }
-        });
     });
     /**
      * Find-Union
      */
     $("#queryBtnUnion").click(function(){
         var nodeNum = $.trim($('#countNum').val());
-        if(0 >= nodeNum){
-            alert("节点要大于1个");
-            return;
-        }
         var connectPairs = $.trim($('#comparePairs').val());
-        if(1 >= connectPairs.length){
-            alert("连接内容不能是空，以|隔开");
-            return;
+        if(checkNotEmpty(connectPairs, "连接内容不能是空，以|隔开") && checkGreaterThan(nodeNum, 0, "节点要大于1个")){
+            ajaxToController("/algorithm/findUnion", {"nodeNum" : nodeNum, "connectPairs" : connectPairs});
         }
-        $.ajax({
-            url:"/algorithm/findUnion",
-            cache: false,
-            type:"post",
-            data:{"nodeNum" : nodeNum, "connectPairs" : connectPairs},
-            beforeSend : function(){
-                loading = layer.load("正在重新设置信息...");
-            },
-            success:function(result){
-                if(result.flag){
-                    $("#resultDiv").html(result.message);
-                }else{
-                    alert(result.message);
-                    $("#resultDiv").html("");
-                }
-            },error:function(){
-                layer.msg('请求错误!', {icon: 7,time: 2000});
-            },
-            complete : function(){
-                layer.close(loading);
-            }
-        });
+    });
+    /**
+     * 快速排序
+     */
+    $("#queryBtnSort").click(function(){
+        var quickSortInput = $.trim($('#quickSortInput').val());
+        if(checkNotEmpty(quickSortInput, "数字不能空，以|隔开")){
+            ajaxToController("/algorithm/quickSort", {"quickSortInput" : quickSortInput});
+        }
     });
 });
+
+function ajaxToController(url, params){
+    $.ajax({
+        url:url,
+        cache: false,
+        type:"post",
+        data:params,
+        beforeSend : function(){
+            loading = layer.load("正在重新设置信息...");
+        },
+        success:function(result){
+            if(result.flag){
+                $("#resultDiv").html(result.message);
+            }else{
+                alert(result.message);
+                $("#resultDiv").html("");
+            }
+        },error:function(){
+            layer.msg('请求错误!', {icon: 7,time: 2000});
+        },
+        complete : function(){
+            layer.close(loading);
+        }
+    });
+}
+
+function checkNotEmpty(str, msg) {
+    if(1 >= str.length){
+        alert(msg);
+        return false;
+    }
+    return true;
+}
+
+function checkGreaterThan(num, compare, msg) {
+    if(compare >= num){
+        alert(msg);
+        return false;
+    }
+    return true;
+}
 
