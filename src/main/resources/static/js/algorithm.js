@@ -27,6 +27,15 @@ $(function(){
             ajaxToController("/algorithm/quickSort", {"quickSortInput" : quickSortInput});
         }
     });
+    /**
+     * 红黑树
+     */
+    $("#queryBtnRedBlack").click(function(){
+        var redBlackInput = $.trim($('#redBlackInput').val());
+        if(checkNotEmpty(redBlackInput, "数字不能空，以|隔开")){
+            ajaxToController("/algorithm/redBlackBST", {"redBlackInput" : redBlackInput});
+        }
+    });
 });
 
 function ajaxToController(url, params){

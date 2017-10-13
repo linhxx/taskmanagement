@@ -77,4 +77,10 @@ public class AlgorithmController {
         jo.put("message", "排序前：" + quickSortInput + "，中位数：" + mediumNum + "，排序后：" + res);
         ServletUtil.createSuccessResponse(200, jo, response);
     }
+    @RequestMapping(value = "/redBlackBST", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public void redBlackBST(HttpServletRequest request , HttpServletResponse response){
+        String redBlackInput = request.getParameter("redBlackInput");
+        JSONObject jo = new JSONObject();
+
+    }
 }
