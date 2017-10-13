@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lin.service.algorithm.CalculateService;
 import com.lin.service.algorithm.FindUnionService;
 import com.lin.service.algorithm.QuickSortService;
+import com.lin.service.algorithm.RedBlackBSTService;
 import com.lin.tools.ServletUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,6 +85,11 @@ public class AlgorithmController {
             ServletUtil.createSuccessResponse(200, jo, response);
             return;
         }
+        RedBlackBSTService redBlackBSTService = new RedBlackBSTService();
+        Integer[] nodes = getSplit(redBlackInput);
+        for(Integer i:nodes){
+            redBlackBSTService.addNode(i, "Node"+i);
+        }
     }
     private JSONObject checkInput(JSONObject jo, String str, String msg){
         if(str.isEmpty()){
@@ -93,5 +99,13 @@ public class AlgorithmController {
             jo.put("flag", true);
         }
         return jo;
+    }
+    private Integer[] getSplit(String str){
+        String[] stringSplits = str.split("\\|");
+        Integer[] res = new Integer[stringSplits.length];
+        for(int i=0;i<stringSplits.length;i++){
+            res[i] = Integer.parseInt(stringSplits[i]);
+        }
+        return res;
     }
 }
