@@ -24,9 +24,8 @@ public class AlgorithmController {
     public void calculate(HttpServletRequest request , HttpServletResponse response){
         String calculateString = request.getParameter("calculateString");
         JSONObject jo = new JSONObject();
-        if(calculateString.isEmpty()){
-            jo.put("flag", false);
-            jo.put("message", "请输入+-*/()及0-9数字");
+        jo = checkInput(jo, calculateString, "请输入+-*/()及0-9数字");
+        if(!jo.getBoolean("flag")){
             ServletUtil.createSuccessResponse(200, jo, response);
             return;
         }
@@ -63,9 +62,8 @@ public class AlgorithmController {
     public void quickSort(HttpServletRequest request , HttpServletResponse response){
         String quickSortInput = request.getParameter("quickSortInput");
         JSONObject jo = new JSONObject();
-        if(quickSortInput.isEmpty()){
-            jo.put("flag", false);
-            jo.put("message", "数字不能空，以|隔开");
+        jo = checkInput(jo, quickSortInput, "数字不能空，以|隔开");
+        if(!jo.getBoolean("flag")){
             ServletUtil.createSuccessResponse(200, jo, response);
             return;
         }
@@ -81,6 +79,19 @@ public class AlgorithmController {
     public void redBlackBST(HttpServletRequest request , HttpServletResponse response){
         String redBlackInput = request.getParameter("redBlackInput");
         JSONObject jo = new JSONObject();
-
+        jo = checkInput(jo, redBlackInput, "数字不能空，以|隔开");
+        if(!jo.getBoolean("flag")){
+            ServletUtil.createSuccessResponse(200, jo, response);
+            return;
+        }
+    }
+    private JSONObject checkInput(JSONObject jo, String str, String msg){
+        if(str.isEmpty()){
+            jo.put("flag", false);
+            jo.put("message", msg);
+        }else{
+            jo.put("flag", true);
+        }
+        return jo;
     }
 }
