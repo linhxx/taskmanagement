@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Stack;
 
 @Controller
 @RequestMapping("/algorithm")
@@ -90,6 +91,15 @@ public class AlgorithmController {
         for(Integer i:nodes){
             redBlackBSTService.addNode(i, "Node"+i);
         }
+        Stack<String> res = redBlackBSTService.getSortedNodes();
+        StringBuilder stringBuilder = new StringBuilder("排序结果：");
+        while (!res.empty()){
+            String str=res.pop();
+            stringBuilder.append(str).append(",");
+        }
+        jo.put("flag", true);
+        jo.put("message", stringBuilder);
+        ServletUtil.createSuccessResponse(200, jo, response);
     }
     private JSONObject checkInput(JSONObject jo, String str, String msg){
         if(str.isEmpty()){

@@ -1,5 +1,6 @@
 package com.lin.service.algorithm;
 
+import java.util.Stack;
 
 /**
  * 红黑树
@@ -92,8 +93,8 @@ public class RedBlackBSTService<Key extends Comparable<Key>, Value> {
         else if(0 < cmp) headNode.right = addNode(headNode.right, key, value);
         else headNode.value = value;
         //根据插入后的情况判断是否需要旋转或颜色调整
-        if(isRed(headNode.right) && !isRed(headNode.left)) rotateLeft(headNode);
-        if(isRed(headNode.left) && isRed(headNode.left.left)) rotateRight(headNode);
+        if(isRed(headNode.right) && !isRed(headNode.left)) headNode = rotateLeft(headNode);
+        if(isRed(headNode.left) && isRed(headNode.left.left)) headNode = rotateRight(headNode);
         if(isRed(headNode.right) && isRed(headNode.left)) flipColor(headNode);
         //节点大小重新获取
         headNode.N = getTotalSize(headNode);
@@ -102,6 +103,22 @@ public class RedBlackBSTService<Key extends Comparable<Key>, Value> {
     public void addNode(Key key, Value value){
         root = addNode(root, key, value);
         root.color = BLACK;
+    }
+    public Stack<Value> getSortedNodes(){
+        if(null == root) return null;
+        Stack<Node> nodeList = new Stack<>();
+        Stack<Value> res = new Stack<>();
+        Node centerNode = root;
+        while(!nodeList.empty() || null != centerNode){
+            while (null != centerNode){
+                nodeList.push(centerNode);
+                centerNode = centerNode.left;
+            }
+            centerNode = nodeList.pop();
+            res.push(centerNode.value);
+            centerNode = centerNode.right;
+        }
+        return res;
     }
 
 }
